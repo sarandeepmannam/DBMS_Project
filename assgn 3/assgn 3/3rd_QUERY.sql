@@ -1,0 +1,4 @@
+select T1.ref_to as X,T2.ref_by as Z, (select main_author from paper where pid=T1.ref_to) as XMainAuth, (select main_author_id from paper where pid=T1.ref_to) as XMainAuthId, (select year_of_pub from paper where pid=T1.ref_to) as XYOP, (select paper_title from paper where pid=T1.ref_to) as XTitle, (select publication_venue from paper where pid=T1.ref_to) as XPubVenue, (select abstract from paper where pid=T1.ref_to) as XAbstract, (select main_author from paper where pid=T2.ref_by) as ZMainAuth, (select main_author_id from paper where pid=T2.ref_by) as ZMainAuthId, (select year_of_pub from paper where pid=T2.ref_by) as ZYOP, (select paper_title from paper where pid=T2.ref_by) as ZTitle, (select publication_venue from paper where pid=T2.ref_by) as ZPubVenue, (select abstract from paper where pid=T2.ref_by) as ZAbstract
+from temp_citation as T1,temp_citation as T2
+where T2.ref_to=T1.ref_by 
+order by X

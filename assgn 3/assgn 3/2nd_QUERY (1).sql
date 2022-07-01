@@ -1,0 +1,4 @@
+select citation.cid, paper.pid as RefByPid, paper.main_author as RefByMainAuth, paper.main_author_id as RefByMainAuthId, paper.year_of_pub as RefByYOP, paper.paper_title RefByTitle, paper.publication_venue as RefByVenue, paper.abstract as RefByAbstract,citation.ref_to RefTopid, (select main_author from paper where pid=citation.ref_to) as RefToMainAuth, (select main_author_id from paper where pid=citation.ref_to) as RefToMainAuthId, (select year_of_pub from paper where pid=citation.ref_to) as RefToYOP, (select paper_title from paper where pid=citation.ref_to) as RefToTitle, (select publication_venue from paper where pid=citation.ref_to) as RefToPubVenue, (select abstract from paper where pid=citation.ref_to) as RefToAbstract
+from citation,paper 
+where citation.ref_by=paper.pid
+order by refbypid
